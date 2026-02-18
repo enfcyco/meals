@@ -5,3 +5,6 @@ enchiladas
 lasagna
 spaghetti
 alfredo
+buffalo mac & cheese
+taco soup
+beef stew
