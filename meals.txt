@@ -27,3 +27,4 @@ chicken wraps
 BLT
 Missouri pot roast
 chicken pot pie
+chili
