@@ -1,19 +1,14 @@
-# GitHub Copilot Instructions for Meals Repository
+# GitHub Copilot Instructions for Meals
 
-## Project Purpose
-This repository is designed to store and manage lists of meals that we like. The long-term goal is to create an automated meal rotation system.
+## Repository conventions
+- Keep `meals.txt`, `sides.txt`, and `suggestions.txt` as simple, readable plain-text lists. Preserve their existing format and backward compatibility.
+- The recipe site is static HTML and CSS. Follow the existing patterns in `index.html`, `recipes/`, and `styles.css`; do not add build tools or dependencies.
 
-## Current Structure
-- `meals.txt`: A simple text file containing a list of favorite meals, one per line
+## Adding recipes from scans
+- Create one individual page under `recipes/` for each distinct recipe the user provides, using the existing recipe-page structure, and add a recipe card linking to each page in `index.html`.
+- Preserve original source links when provided. Transcribe visible ingredient amounts, timings, and handwritten notes accurately. Clearly identify information that is unreadable or absent; never invent missing directions.
+- Write directions in concise original phrasing rather than reproducing long source text verbatim.
+- Do not make unrelated list changes, such as adding a meal that is already listed. Do not add a scanner app or OCR tooling unless explicitly requested.
 
-## Future Goals
-- Implement meal rotation functionality
-- Auto-generate meal plans
-- Possibly add categorization (e.g., Italian, Mexican, American)
-- Add preparation time, ingredients, or difficulty ratings
-
-## Guidelines for Assistance
-- Keep the meal list simple and easy to read
-- When adding features, maintain backward compatibility with the simple text format
-- Focus on practical, easy-to-use solutions
-- Consider adding meal categories or tags in the future
+## Validation
+- Check that local links resolve and run `git diff --check` before completing changes.
