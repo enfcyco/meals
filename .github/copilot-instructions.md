@@ -6,7 +6,7 @@
 
 ## Adding recipes from scans
 - Create one individual page under `recipes/` for each distinct recipe the user provides, using the existing recipe-page structure, and add a recipe card linking to each page in `index.html`.
-- Preserve original source links when provided. Transcribe visible ingredient amounts, timings, and handwritten notes accurately. Clearly identify information that is unreadable or absent; never invent missing directions.
+- Preserve original source links when provided, and transcribe visible ingredient amounts and timings accurately. Preserve each legible handwritten note as a meaningful family preference at the relevant ingredient or step, clearly marked as a note, asterisk, or modification; keep it separate from the original recipe text. Label unclear handwriting as uncertain instead of guessing, and clearly identify other unreadable or absent information. Never invent missing directions.
 - Write directions in concise original phrasing rather than reproducing long source text verbatim.
 - Do not make unrelated list changes, such as adding a meal that is already listed. Do not add a scanner app or OCR tooling unless explicitly requested.
 
