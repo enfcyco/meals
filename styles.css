@@ -265,3 +265,87 @@ h2 {
     min-height: 13rem;
   }
 }
+
+@page {
+  margin: 0.45in;
+}
+
+@media print {
+  body:has(.recipe-page) {
+    background: #fff;
+    color: #000;
+    font-size: 10pt;
+    line-height: 1.35;
+  }
+
+  body:has(.recipe-page) .site-header,
+  body:has(.recipe-page) .site-footer,
+  body:has(.recipe-page) .back-link,
+  body:has(.recipe-page) .eyebrow {
+    display: none;
+  }
+
+  body:has(.recipe-page) main.recipe-page {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .recipe-page h1 {
+    margin-bottom: 0.35rem;
+    font-size: 22pt;
+    line-height: 1.1;
+    break-after: avoid-page;
+    page-break-after: avoid;
+  }
+
+  .recipe-summary {
+    margin-bottom: 0.5rem;
+    font-size: 10pt;
+  }
+
+  .recipe-facts {
+    gap: 0.25rem 1.25rem;
+    margin-block: 0.6rem 0.8rem;
+    padding-block: 0.35rem;
+    font-size: 8.5pt;
+  }
+
+  .recipe-page section {
+    margin-top: 0.8rem;
+    break-inside: avoid-page;
+    page-break-inside: avoid;
+  }
+
+  .recipe-page h2 {
+    margin-bottom: 0.35rem;
+    font-size: 13pt;
+    break-after: avoid-page;
+    page-break-after: avoid;
+  }
+
+  .recipe-page ul,
+  .recipe-page ol {
+    margin-block: 0.35rem;
+    padding-left: 1.25rem;
+  }
+
+  .recipe-page li {
+    margin-bottom: 0.15rem;
+    padding-left: 0.1rem;
+    break-inside: avoid-page;
+    page-break-inside: avoid;
+  }
+
+  .recipe-note {
+    margin-block: 0.7rem;
+    padding: 0.4rem 0.6rem;
+    background: transparent;
+  }
+
+  .recipe-page p {
+    orphans: 3;
+    widows: 3;
+  }
+}
