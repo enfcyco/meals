@@ -47,46 +47,49 @@
         <li>2 tablespoons butter, softened</li>
       </ul>
     </section>
-    <section>
-      <h2>Directions</h2>
+    <section id="directions">
+      <div class="section-heading directions-heading">
+        <h2>Directions</h2>
+        <button class="photo-toggle" type="button" aria-expanded="false" hidden>Show all step photos</button>
+      </div>
       <ol>
         <li>Warm the milk to 120–130°F. Mix the dough ingredients, adding the flour gradually to form a soft dough.
           <p class="recipe-note"><strong>Our note:</strong> I like King Arthur Bread Flour, about 430 grams.</p>
-          <details class="step-photo">
-            <summary><span aria-hidden="true">📷</span><span class="visually-hidden">Show example photo for mixing the dough</span></summary>
+          <span class="step-photo-cue"><span aria-hidden="true">📷</span><span class="visually-hidden"> Example photo available</span></span>
+          <div class="step-photo">
             <figure>
               <img src="../images/caramel-sticky-rolls/IMG_6312.jpeg" alt="Freshly mixed sticky-roll dough in a covered mixing bowl" loading="lazy">
               <figcaption>Freshly mixed dough, before the first rise.</figcaption>
             </figure>
-          </details>
+          </div>
         </li>
         <li>Knead the dough and let it rise until doubled, about 1½ hours.
-          <details class="step-photo">
-            <summary><span aria-hidden="true">📷</span><span class="visually-hidden">Show example photo for the risen dough</span></summary>
+          <span class="step-photo-cue"><span aria-hidden="true">📷</span><span class="visually-hidden"> Example photo available</span></span>
+          <div class="step-photo">
             <figure>
               <img src="../images/caramel-sticky-rolls/IMG_6313.jpeg" alt="Sticky-roll dough risen in a mixing bowl" loading="lazy">
               <figcaption>The dough after rising.</figcaption>
             </figure>
-          </details>
+          </div>
         </li>
         <li>In a saucepan, heat the topping's brown sugar and ½ cup butter to boiling, stirring occasionally. Remove from the heat and stir in the corn syrup. Pour into an ungreased 13-by-9-inch pan and scatter pecan halves over it, if using.
-          <details class="step-photo">
-            <summary><span aria-hidden="true">📷</span><span class="visually-hidden">Show example photo for preparing the caramel topping</span></summary>
+          <span class="step-photo-cue"><span aria-hidden="true">📷</span><span class="visually-hidden"> Example photo available</span></span>
+          <div class="step-photo">
             <figure>
               <img src="../images/caramel-sticky-rolls/IMG_6315.jpeg" alt="Caramel topping in a glass bowl with a red spatula" loading="lazy">
               <figcaption>The caramel topping mixture.</figcaption>
             </figure>
-          </details>
+          </div>
         </li>
         <li>Combine the filling sugar and cinnamon with the chopped pecans or raisins, if using. Punch down the dough and roll it into a rectangle. Spread with the softened butter, then sprinkle on the filling. Starting at a long edge, roll up the dough and cut into 15 slices.
           <p class="recipe-note"><strong>Our version:</strong> Roll the dough out on a large wooden cutting board. Spread Blue Bonnet Lite over the dough, then sprinkle with brown sugar and cinnamon before rolling it up. This family method is a variation on the printed filling directions.</p>
-          <details class="step-photo">
-            <summary><span aria-hidden="true">📷</span><span class="visually-hidden">Show example photo for slicing the rolls</span></summary>
+          <span class="step-photo-cue"><span aria-hidden="true">📷</span><span class="visually-hidden"> Example photo available</span></span>
+          <div class="step-photo">
             <figure>
               <img src="../images/caramel-sticky-rolls/IMG_6314.jpeg" alt="Unbaked cinnamon rolls sliced into rounds in a baking pan" loading="lazy">
               <figcaption>The rolls sliced into rounds.</figcaption>
             </figure>
-          </details>
+          </div>
         </li>
         <li>Arrange the slices in the pan over the caramel. Cover and let rise until doubled, about 30 minutes.</li>
         <li>Heat the oven to 350°F. Bake for 30–35 minutes, until golden. Let stand for 2–3 minutes, then invert onto a serving tray to release the caramel.</li>
@@ -94,6 +97,25 @@
     </section>
     <p>Source: Betty Crocker Kitchens, “Caramel Sticky Rolls,” updated 08/03/2026. Directions are rewritten for this recipe page; no source URL was provided.</p>
   </main>
+  <script>
+    const photoToggle = document.querySelector(".photo-toggle");
+    const stepPhotos = document.querySelectorAll(".step-photo");
+
+    if (photoToggle && stepPhotos.length) {
+      stepPhotos.forEach((photo) => {
+        photo.hidden = true;
+      });
+      photoToggle.hidden = false;
+      photoToggle.addEventListener("click", () => {
+        const showPhotos = photoToggle.getAttribute("aria-expanded") !== "true";
+        stepPhotos.forEach((photo) => {
+          photo.hidden = !showPhotos;
+        });
+        photoToggle.setAttribute("aria-expanded", String(showPhotos));
+        photoToggle.textContent = showPhotos ? "Hide all step photos" : "Show all step photos";
+      });
+    }
+  </script>
   <footer class="site-footer">
     <p><a href="../index.html">Back to all recipes</a></p>
   </footer>
