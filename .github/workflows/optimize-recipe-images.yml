@@ -1,0 +1,92 @@
+name: Optimize Recipe Images
+
+on:
+  workflow_dispatch:
+    inputs:
+      recipe:
+        description: 'Recipe filename in recipes/ (for example, butter-chicken.html)'
+        required: true
+        type: string
+      images:
+        description: 'Root-level .jpg/.jpeg filenames to process, comma-separated'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out selected branch
+        uses: actions/checkout@v5
+
+      - name: Install ImageMagick
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y imagemagick
+
+      - name: Optimize and commit images
+        env:
+          RECIPE: ${{ inputs.recipe }}
+          IMAGE_INPUT: ${{ inputs.images }}
+        run: |
+          set -euo pipefail
+          shopt -s nocasematch
+
+          if [[ ! "$RECIPE" =~ ^[a-z0-9][a-z0-9-]*\.html$ ]] || [[ ! -f "recipes/$RECIPE" ]]; then
+            echo "ERROR: Choose an existing recipe filename from recipes/, such as butter-chicken.html."
+            exit 1
+          fi
+
+          RECIPE_SLUG="${RECIPE%.html}"
+          OUTPUT_DIR="images/$RECIPE_SLUG"
+          mkdir -p "$OUTPUT_DIR"
+
+          IFS=',' read -r -a IMAGES <<< "$IMAGE_INPUT"
+          if [[ ${#IMAGES[@]} -eq 0 ]]; then
+            echo "ERROR: Provide at least one root-level JPEG filename."
+            exit 1
+          fi
+
+          for index in "${!IMAGES[@]}"; do
+            image="${IMAGES[$index]}"
+            image="${image#"${image%%[![:space:]]*}"}"
+            image="${image%"${image##*[![:space:]]}"}"
+            if [[ ! "$image" =~ ^[a-z0-9][a-z0-9._\ -]*\.(jpg|jpeg)$ ]] || [[ ! -f "$image" ]]; then
+              echo "ERROR: '$image' is not an existing root-level .jpg or .jpeg filename."
+              exit 1
+            fi
+            IMAGES[$index]="$image"
+
+            filename="${image##*/}"
+            basename="${filename%.*}"
+            output="$OUTPUT_DIR/$basename.jpeg"
+            if [[ -e "$output" ]]; then
+              echo "ERROR: Refusing to overwrite existing image: $output"
+              exit 1
+            fi
+
+            echo "Optimizing $image into $output"
+            convert "$image" -auto-orient -resize '1920x1920>' -quality 85 "$output"
+
+            read -r width height < <(identify -format '%w %h' "$output")
+            if (( width > 1920 || height > 1920 )); then
+              echo "ERROR: Optimized image exceeds 1920 pixels: ${width}x${height}"
+              exit 1
+            fi
+
+            echo "Created ${width}x${height}, $(du -h "$output" | cut -f1)"
+            rm -- "$image"
+          done
+
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add -A -- "$OUTPUT_DIR" "${IMAGES[@]}"
+          if git diff --cached --quiet; then
+            echo "ERROR: No optimized images to commit."
+            exit 1
+          fi
+          git commit -m "Add optimized images for ${OUTPUT_DIR#images/}"
+          git push

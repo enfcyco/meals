@@ -14,5 +14,11 @@
 - Write directions in concise original phrasing rather than reproducing long source text verbatim.
 - Do not make unrelated list changes, such as adding a meal that is already listed. Do not add a scanner app or OCR tooling unless explicitly requested.
 
+## Recipe photos
+- Keep optimized recipe photos in `images/<recipe-filename-without-extension>/`, for example `images/butter-chicken/` for `recipes/butter-chicken.html`. Preserve each source filename and use the `.jpeg` extension for the optimized output.
+- The `Optimize Recipe Images` GitHub Actions workflow accepts a recipe filename and comma-separated root-level `.jpg`/`.jpeg` filenames. It auto-orients each image, resizes it without upscaling so neither dimension exceeds 1920 pixels, saves it as JPEG at quality 85, removes the specified root-level originals, and commits the results to the branch selected when dispatching the workflow.
+- Check the selected branch and recipe filename before running the workflow. Do not dispatch it on `main` for work intended for another branch. Review generated images and their file sizes before using them.
+- In a recipe page under `recipes/`, reference an image using a relative path such as `../images/butter-chicken/IMG_1234.jpeg` and provide meaningful alt text. Do not add unoptimized source uploads as website images.
+
 ## Validation
 - Check that local links resolve and run `git diff --check` before completing changes.
