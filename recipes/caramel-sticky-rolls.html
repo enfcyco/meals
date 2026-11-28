@@ -50,12 +50,12 @@
     <section id="directions">
       <div class="section-heading directions-heading">
         <h2>Directions</h2>
-        <button class="photo-toggle" type="button" aria-expanded="false" hidden>Show all step photos</button>
+        <button class="photo-toggle" type="button" aria-expanded="false" hidden>Show photos</button>
       </div>
       <ol>
         <li>Warm the milk to 120–130°F. Mix the dough ingredients, adding the flour gradually to form a soft dough.
-          <p class="recipe-note"><strong>Our note:</strong> I like King Arthur Bread Flour, about 430 grams.</p>
           <span class="step-photo-cue"><span aria-hidden="true">📷</span><span class="visually-hidden"> Example photo available</span></span>
+          <p class="recipe-note"><strong>Our note:</strong> I like King Arthur Bread Flour, about 430 grams.</p>
           <div class="step-photo">
             <figure>
               <img src="../images/caramel-sticky-rolls/IMG_6312.jpeg" alt="Freshly mixed sticky-roll dough in a covered mixing bowl" loading="lazy">
@@ -82,8 +82,8 @@
           </div>
         </li>
         <li>Combine the filling sugar and cinnamon with the chopped pecans or raisins, if using. Punch down the dough and roll it into a rectangle. Spread with the softened butter, then sprinkle on the filling. Starting at a long edge, roll up the dough and cut into 15 slices.
-          <p class="recipe-note"><strong>Our version:</strong> Roll the dough out on a large wooden cutting board. Spread Blue Bonnet Lite over the dough, then sprinkle with brown sugar and cinnamon before rolling it up. This family method is a variation on the printed filling directions.</p>
           <span class="step-photo-cue"><span aria-hidden="true">📷</span><span class="visually-hidden"> Example photo available</span></span>
+          <p class="recipe-note"><strong>Our version:</strong> Roll the dough out on a large wooden cutting board. Spread Blue Bonnet Lite over the dough, then sprinkle with brown sugar and cinnamon before rolling it up. This family method is a variation on the printed filling directions.</p>
           <div class="step-photo">
             <figure>
               <img src="../images/caramel-sticky-rolls/IMG_6314.jpeg" alt="Unbaked cinnamon rolls sliced into rounds in a baking pan" loading="lazy">
@@ -112,7 +112,7 @@
           photo.hidden = !showPhotos;
         });
         photoToggle.setAttribute("aria-expanded", String(showPhotos));
-        photoToggle.textContent = showPhotos ? "Hide all step photos" : "Show all step photos";
+        photoToggle.textContent = showPhotos ? "Hide photos" : "Show photos";
       });
     }
   </script>
