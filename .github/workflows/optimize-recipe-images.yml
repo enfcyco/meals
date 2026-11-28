@@ -71,7 +71,7 @@ jobs:
             echo "Optimizing $image into $output"
             convert "$image" -auto-orient -resize '1920x1920>' -quality 85 "$output"
 
-            read -r width height < <(identify -format '%w %h' "$output")
+            read -r width height < <(identify -format '%w %h\n' "$output")
             if (( width > 1920 || height > 1920 )); then
               echo "ERROR: Optimized image exceeds 1920 pixels: ${width}x${height}"
               exit 1
